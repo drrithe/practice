@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Welcome to PRN Generator</title>
+	<style type="text/css">
+		body{
+			text-align : center;
+			background-color : Orange;
+			font-family: helvetica;
+		}
+		h1{
+			margin-top: 5rem;
+			margin-bottom: 5rem;
+			color: white;
+			font-size: 40px;
+		}
+		h2{
+			color: purple;
+			margin-bottom: 3rem;
+		}
+		#form{
+			height: 25rem;
+			background-color: lightblue;
+			display: inline-block;
+			width: 35%	
+		}
+		#fom{
+			margin-top: 5rem;
+		}
+		#elem{
+			margin-top: 3rem; 
+		}
+
+	</style>
+</head>
+<body>
+	<script type="text/javascript">
+		
+		function calljs()
+		{
+			var branch = document.getElementById('Branch').value;
+			var batch  = document.getElementById('Batch').value;
+			var sequence = document.getElementById('Sequence').value;
+			var year = document.getElementById('Year').value;
+			var valid = true;
+			if (year < 1950 || year > 2020)
+			{
+				alert("Invalid Year");
+				valid=false;
+			}
+			if (batch.length>2 || batch.length<1)
+		    {
+		     alert("Invalid Batch Number");
+		     valid=false;
+		    } 
+		  	
+		  	if(sequence.length>4 || sequence.length<1)
+		  	{
+		  		alert("Invalid Sequence Number")
+		  		valid=false;
+		  	}
+			batch = batch.toString();
+			sequence = sequence.toString();
+			if(batch.length<2)
+			{
+				batch = "0"+batch;
+			}
+			if(sequence.length<2)
+			{
+				sequence = "000"+sequence;
+			}
+			else if(sequence.length<3)
+			{
+				sequence = "00"+sequence;
+			}
+			else if(sequence.length<4)
+			{
+				sequence = "0"+sequence;
+			}
+			var prn;
+			if(valid)
+			{
+				prn = "PRN No is : "+year+branch.toString()+batch+sequence;
+				alert(prn);
+			}
+		}
+	</script>
+
+	<h1>Welcome To PRN Generator</h1>
+	<div>
+		<h2>Please Fill below form to generate your PRN Number</h2>
+		<div id="form">
+			<form id="fom">
+				<div id="elem">
+					<label for="year">Enter Year:</label>
+					<input type="Number" name="year" id="Year" required>
+				</div>
+				<div id="elem">
+					<label for="branch">Select Branch Code</label>
+					<select name="branch" id="Branch" required>
+						<option value="CS">Computer</option>
+						<option value="ME">Mechanical</option>
+						<option value="CV">Civil</option>
+						<option value="EX">E & TC</option>
+						<option value="CH">Chemical</option>
+						<option value="IF">Information Technology</option>
+					</select>
+				</div>
+				<div id="elem">
+					<label for="batch">Enter Batch No:</label>
+					<input type="Number" name="batch" id="Batch" required>
+				</div>
+				<div id="elem">
+					<label for="seq">Enter Sequence Number</label>
+					<input type="number" name="seq" id="Sequence" required>
+				</div>
+				<div id="elem">	
+					<input type="submit" onclick="calljs();" name="submit">
+				</div>
+			</form>
+		</div>
+	</div>
+</body>
+</html>
